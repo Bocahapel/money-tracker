@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
-import { NgClass, NgIf, CurrencyPipe, DatePipe } from '@angular/common';
+import { NgClass, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 //prime
@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule, ButtonModule],
+  imports: [NgClass, CurrencyPipe, DatePipe, FormsModule, ButtonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -80,5 +80,10 @@ export class Dashboard {
     this.transactions.update((list) => list.filter((t) => t.id !== this.deletingId));
     this.showDelModal = false;
     this.deletingId = null;
+  }
+
+  toggleDarkMode() {
+    const element = document.querySelector('html');
+    element?.classList.toggle('my-app-dark');
   }
 }
