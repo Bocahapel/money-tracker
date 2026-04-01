@@ -3,9 +3,12 @@ import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
 import { NgClass, NgIf, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+//prime
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-dashboard',
-  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule],
+  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule, ButtonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
