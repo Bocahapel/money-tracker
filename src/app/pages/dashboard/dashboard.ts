@@ -71,6 +71,10 @@ export class Dashboard {
     this.showModal = false;
   }
 
+  onCancel() {
+    this.showModal = false;
+  }
+
   openDelete(id: number) {
     this.deletingId = id;
     this.showDelModal = true;

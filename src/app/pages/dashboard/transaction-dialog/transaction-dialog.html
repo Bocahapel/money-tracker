@@ -1,5 +1,148 @@
 @if (showModal) {
   <div>
-    <p>transaction-dialog works!</p>
+    <div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+      <div
+        class="fixed top-0 right-0 h-full w-80 bg-[#1a1a1c] border-l border-[#2c2c2a] z-50 p-6 flex flex-col"
+      >
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-base font-medium text-[#FFFFF5]">
+            {{ isEditing ? 'Edit Transaction' : 'Add Transaction' }}
+          </h2>
+          <button
+            (click)="onCancel()"
+            class="text-[#A32D2D] hover:text-[#e35656] text-lg leading-none"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="mb-3.5">
+          <label class="text-xs text-[#888780] block mb-2">Type</label>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button
+              (click)="initialTransaction.type = 'income'"
+              [ngClass]="
+                initialTransaction.type === 'income'
+                  ? 'border-[#1D9E75] bg-[#04342C] text-[#5DCAA5]'
+                  : 'border-[#2c2c2a] bg-[#0f0f10] text-[#888780]'
+              "
+              class="py-2 rounded-lg border text-sm transition-colors"
+            >
+              Income
+            </button>
+            <button
+              (click)="initialTransaction.type = 'expense'"
+              [ngClass]="
+                initialTransaction.type === 'expense'
+                  ? 'border-[#A32D2D] bg-[#501313] text-[#F09595]'
+                  : 'border-[#2c2c2a] bg-[#0f0f10] text-[#888780]'
+              "
+              class="py-2 rounded-lg border text-sm transition-colors"
+            >
+              Expense
+            </button>
+          </div>
+        </div>
+      </div>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
   </div>
 }
+
+<!-- Add/Edit Modal -->
+<!-- @if (showModal) {
+  <div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-[#1a1a1c] border border-[#2c2c2a] rounded-2xl p-6 w-full max-w-sm">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-base font-medium">
+          {{ isEditing ? 'Edit transaction' : 'Add transaction' }}
+        </h2>
+        <button
+          (click)="showModal = false"
+          class="text-[#888780] hover:text-[#e8e6e0] text-lg leading-none"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="mb-3.5">
+        <label class="text-xs text-[#888780] block mb-2">Type</label>
+        <div class="grid grid-cols-2 gap-1.5">
+          <button
+            (click)="form.type = 'income'"
+            [ngClass]="
+              form.type === 'income'
+                ? 'border-[#1D9E75] bg-[#04342C] text-[#5DCAA5]'
+                : 'border-[#2c2c2a] bg-[#0f0f10] text-[#888780]'
+            "
+            class="py-2 rounded-lg border text-sm transition-colors"
+          >
+            Income
+          </button>
+          <button
+            (click)="form.type = 'expense'"
+            [ngClass]="
+              form.type === 'expense'
+                ? 'border-[#A32D2D] bg-[#501313] text-[#F09595]'
+                : 'border-[#2c2c2a] bg-[#0f0f10] text-[#888780]'
+            "
+            class="py-2 rounded-lg border text-sm transition-colors"
+          >
+            Expense
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-3.5">
+        <label class="text-xs text-[#888780] block mb-2">Category</label>
+        <input
+          [(ngModel)]="form.category"
+          type="text"
+          placeholder="e.g. groceries, salary"
+          class="w-full bg-[#0f0f10] border border-[#2c2c2a] focus:border-[#1D9E75] rounded-lg px-3 py-2.5 text-sm text-[#e8e6e0] outline-none"
+        />
+      </div>
+      <div class="mb-3.5">
+        <label class="text-xs text-[#888780] block mb-2">Amount (Rp)</label>
+        <input
+          [(ngModel)]="form.amount"
+          type="number"
+          placeholder="0"
+          class="w-full bg-[#0f0f10] border border-[#2c2c2a] focus:border-[#1D9E75] rounded-lg px-3 py-2.5 text-sm text-[#e8e6e0] outline-none"
+        />
+      </div>
+      <div class="mb-3.5">
+        <label class="text-xs text-[#888780] block mb-2">Date</label>
+        <input
+          [(ngModel)]="form.date"
+          type="date"
+          class="w-full bg-[#0f0f10] border border-[#2c2c2a] focus:border-[#1D9E75] rounded-lg px-3 py-2.5 text-sm text-[#e8e6e0] outline-none"
+        />
+      </div>
+      <div class="mb-5">
+        <label class="text-xs text-[#888780] block mb-2">Note</label>
+        <input
+          [(ngModel)]="form.note"
+          type="text"
+          placeholder="Optional note"
+          class="w-full bg-[#0f0f10] border border-[#2c2c2a] focus:border-[#1D9E75] rounded-lg px-3 py-2.5 text-sm text-[#e8e6e0] outline-none"
+        />
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          (click)="showModal = false"
+          class="flex-1 py-2.5 rounded-lg border border-[#2c2c2a] bg-[#0f0f10] text-sm text-[#888780] hover:bg-[#2c2c2a] transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          (click)="save()"
+          class="flex-1 py-2.5 rounded-lg bg-[#1D9E75] hover:bg-[#0F6E56] text-sm font-medium text-[#E1F5EE] transition-colors"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+} -->

@@ -24,11 +24,6 @@
     </div>
   </div>
 
-  <app-transaction-dialog
-    [initialTransaction]="transactions()"
-    [showModal]="showModal"
-    [isEditing]="isEditing"
-  />
   <!-- Summary cards -->
   <div class="grid grid-cols-3 gap-3 mb-6">
     <div class="bg-[#1D9E75] rounded-xl p-4">
@@ -55,7 +50,7 @@
   <p class="text-[11px] text-[#888780] font-medium uppercase tracking-widest mb-2.5">
     Recent transactions
   </p>
-  <div class="flex flex-col gap-0.5">
+  <div class="flex flex-col gap-2">
     @for (tx of transactions(); track tx.id) {
       <div
         class="flex items-center gap-3 bg-[#1a1a1c] border border-[#2c2c2a] rounded-xl px-3.5 py-3"
@@ -247,6 +242,13 @@
     </div>
   </div>
 } -->
+
+<app-transaction-dialog
+  [initialTransaction]="form"
+  [showModal]="showModal"
+  [isEditing]="isEditing"
+  (cancelDialog)="onCancel()"
+/>
 
 <!-- Delete Confirm Modal -->
 @if (showDelModal) {
