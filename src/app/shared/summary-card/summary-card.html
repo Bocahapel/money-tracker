@@ -1,0 +1,26 @@
+<div
+  [class]="
+    variant === 'primary'
+      ? 'bg-[#1D9E75] rounded-xl p-4'
+      : 'bg-[#1a1a1c] border border-[#2c2c2a] rounded-xl p-4'
+  "
+>
+  <p
+    [class]="
+      variant === 'primary' ? 'text-xs text-[#9FE1CB] mb-1.5' : 'text-xs text-[#888780] mb-1.5'
+    "
+  >
+    {{ label }}
+  </p>
+  <p
+    [class]="
+      variant === 'primary'
+        ? 'text-xl font-medium tracking-tight text-[#E1F5EE]'
+        : value >= 0
+          ? 'text-xl font-medium tracking-tight text-[#5DCAA5]'
+          : 'text-xl font-medium tracking-tight text-[#E24B4A]'
+    "
+  >
+    {{ value | currency: 'IDR' : 'Rp ' : '1.0-0' }}
+  </p>
+</div>

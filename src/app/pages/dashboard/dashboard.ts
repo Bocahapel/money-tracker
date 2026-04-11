@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 
 //component
 import { TransactionDialog } from './transaction-dialog/transaction-dialog';
+import { SummaryCard } from '../../shared/summary-card/summary-card';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule, TransactionDialog],
+  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule, TransactionDialog, SummaryCard],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
