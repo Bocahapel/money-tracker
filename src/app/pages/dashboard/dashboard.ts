@@ -27,6 +27,8 @@ export class Dashboard {
   );
   balance = computed(() => this.totalIncome() - this.totalExpense());
 
+  todayDate = new Date();
+
   // Modal state
   showModal = false;
   showDelModal = false;
@@ -59,7 +61,7 @@ export class Dashboard {
     this.showModal = true;
   }
 
-  save() {
+  save(form: Transaction) {
     if (!this.form.category || !this.form.amount || !this.form.date) return;
     if (this.isEditing) {
       this.transactions.update((list) =>

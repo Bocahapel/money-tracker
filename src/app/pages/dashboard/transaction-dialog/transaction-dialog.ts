@@ -3,6 +3,7 @@ import { Transaction } from '../../../shared/transaction-data';
 import { FormsModule } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-transaction-dialog',
   imports: [FormsModule, CommonModule],
@@ -15,30 +16,35 @@ export class TransactionDialog implements OnInit {
   @Input({ required: true }) isEditing = false;
 
   //output
-  @Output() cancelDialog = new EventEmitter();
+  @Output() cancelDialog = new EventEmitter<Transaction>();
+  @Output() saveDialog = new EventEmitter();
 
-  // get form(): Transaction {
-  //   return this.initialTransaction!;
-  // }
+  get form(): Transaction {
+    return this.initialTransaction!;
+  }
 
   // reset form
   // form: Transaction = this.emptyForm();
 
-  // emptyForm(): Transaction {
-  //   return {
-  //     id: 0,
-  //     type: 'income',
-  //     category: '',
-  //     amount: 0,
-  //     date: new Date().toISOString().split('T')[0],
-  //     note: '',
-  //   };
-  // }
+  emptyForm(): Transaction {
+    return {
+      id: 0,
+      type: 'income',
+      category: '',
+      amount: 0,
+      date: new Date().toISOString().split('T')[0],
+      note: '',
+    };
+  }
 
   ngOnInit(): void {
     console.log(this.initialTransaction);
     console.log(this.showModal);
     console.log(this.isEditing);
+  }
+
+  onSave() {
+    this.saveDialog.emit(this.form);
   }
 
   onCancel() {

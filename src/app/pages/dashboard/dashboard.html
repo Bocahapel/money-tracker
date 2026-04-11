@@ -4,8 +4,8 @@
     <h1 class="text-lg font-medium tracking-tight">Finance dashboard</h1>
     <div class="flex items-center gap-2">
       <span
-        class="text-xs text-[#888780] bg-[#1a1a1c] border border-[#2c2c2a] rounded-lg px-3 py-1.5"
-        >March 2026</span
+        class="text-xs text-[#888780] bg-[#1a1a1c] border border-[#2c2c2a] rounded-lg px-3 py-2"
+        >{{ todayDate | date: 'fullDate' }}</span
       >
       <button
         (click)="openAdd()"
@@ -247,6 +247,7 @@
   [initialTransaction]="form"
   [showModal]="showModal"
   [isEditing]="isEditing"
+  (saveDialog)="save($event)"
   (cancelDialog)="onCancel()"
 />
 
