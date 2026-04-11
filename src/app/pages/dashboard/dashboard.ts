@@ -3,9 +3,12 @@ import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
 import { NgClass, NgIf, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+//component
+import { TransactionDialog } from './transaction-dialog/transaction-dialog';
+
 @Component({
   selector: 'app-dashboard',
-  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule],
+  imports: [NgClass, NgIf, CurrencyPipe, DatePipe, FormsModule, TransactionDialog],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -23,6 +26,8 @@ export class Dashboard {
       .reduce((s, t) => s + t.amount, 0),
   );
   balance = computed(() => this.totalIncome() - this.totalExpense());
+
+  todayDate = new Date();
 
   // Modal state
   showModal = false;
@@ -56,7 +61,7 @@ export class Dashboard {
     this.showModal = true;
   }
 
-  save() {
+  save(form: Transaction) {
     if (!this.form.category || !this.form.amount || !this.form.date) return;
     if (this.isEditing) {
       this.transactions.update((list) =>
@@ -65,6 +70,10 @@ export class Dashboard {
     } else {
       this.transactions.update((list) => [...list, { ...this.form, id: this.nextId++ }]);
     }
+    this.showModal = false;
+  }
+
+  onCancel() {
     this.showModal = false;
   }
 

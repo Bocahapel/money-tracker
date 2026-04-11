@@ -4,8 +4,8 @@
     <h1 class="text-lg font-medium tracking-tight">Finance dashboard</h1>
     <div class="flex items-center gap-2">
       <span
-        class="text-xs text-[#888780] bg-[#1a1a1c] border border-[#2c2c2a] rounded-lg px-3 py-1.5"
-        >March 2026</span
+        class="text-xs text-[#888780] bg-[#1a1a1c] border border-[#2c2c2a] rounded-lg px-3 py-2"
+        >{{ todayDate | date: 'fullDate' }}</span
       >
       <button
         (click)="openAdd()"
@@ -50,7 +50,7 @@
   <p class="text-[11px] text-[#888780] font-medium uppercase tracking-widest mb-2.5">
     Recent transactions
   </p>
-  <div class="flex flex-col gap-0.5">
+  <div class="flex flex-col gap-2">
     @for (tx of transactions(); track tx.id) {
       <div
         class="flex items-center gap-3 bg-[#1a1a1c] border border-[#2c2c2a] rounded-xl px-3.5 py-3"
@@ -146,7 +146,7 @@
 </div>
 
 <!-- Add/Edit Modal -->
-@if (showModal) {
+<!-- @if (showModal) {
   <div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     <div class="bg-[#1a1a1c] border border-[#2c2c2a] rounded-2xl p-6 w-full max-w-sm">
       <div class="flex items-center justify-between mb-5">
@@ -161,7 +161,6 @@
         </button>
       </div>
 
-      <!-- Type toggle -->
       <div class="mb-3.5">
         <label class="text-xs text-[#888780] block mb-2">Type</label>
         <div class="grid grid-cols-2 gap-1.5">
@@ -242,7 +241,15 @@
       </div>
     </div>
   </div>
-}
+} -->
+
+<app-transaction-dialog
+  [initialTransaction]="form"
+  [showModal]="showModal"
+  [isEditing]="isEditing"
+  (saveDialog)="save($event)"
+  (cancelDialog)="onCancel()"
+/>
 
 <!-- Delete Confirm Modal -->
 @if (showDelModal) {
