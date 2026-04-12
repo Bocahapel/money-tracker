@@ -1,26 +1,20 @@
 [
   {
-    "id": 1,
-    "type": "expense",
-    "category": "groceries",
-    "amount": 150000,
-    "date": "2026-03-25",
-    "note": "Weekly shopping"
-  },
-  {
-    "id": 2,
     "type": "income",
-    "category": "salary",
-    "amount": 1500000,
-    "date": "2026-03-20",
-    "note": "March salary"
+    "category": "test income",
+    "amount": 2000000,
+    "date": "2026-04-12",
+    "note": "test_1",
+    "source": "BCA",
+    "id": 4
   },
   {
-    "type": "expense",
-    "category": "food",
-    "amount": 50000,
-    "date": "2026-04-12",
-    "note": "Lunch",
-    "id": 3
+    "type": "income",
+    "category": "bonus",
+    "amount": 5000000,
+    "date": "2026-04-13",
+    "note": "bonus kantor",
+    "source": "BCA",
+    "id": 6
   }
 ]

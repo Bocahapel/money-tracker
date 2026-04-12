@@ -1,11 +1,13 @@
-import { Component, computed, signal } from '@angular/core';
-import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+// import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
+import { Transaction } from '../../shared/transaction-data';
 import { NgClass, NgIf, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 //component
 import { TransactionDialog } from './transaction-dialog/transaction-dialog';
 import { SummaryCard } from '../../shared/summary-card/summary-card';
+import { TransactionFacade } from '../../core/transaction.facade';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,20 +15,14 @@ import { SummaryCard } from '../../shared/summary-card/summary-card';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-  transactions = signal<Transaction[]>(MOCK_TRANSACTIONS);
+export class Dashboard implements OnInit {
+  public facade = inject(TransactionFacade);
 
-  totalIncome = computed(() =>
-    this.transactions()
-      .filter((t) => t.type === 'income')
-      .reduce((s, t) => s + t.amount, 0),
-  );
-  totalExpense = computed(() =>
-    this.transactions()
-      .filter((t) => t.type === 'expense')
-      .reduce((s, t) => s + t.amount, 0),
-  );
-  balance = computed(() => this.totalIncome() - this.totalExpense());
+  readonly transactions = this.facade.transactions;
+  readonly totalIncome = this.facade.totalIncome;
+  readonly totalExpense = this.facade.totalExpense;
+  readonly balance = this.facade.balance;
+  readonly loading = this.facade.loading;
 
   todayDate = new Date();
 
@@ -35,9 +31,12 @@ export class Dashboard {
   showDelModal = false;
   isEditing = false;
   deletingId: number | null = null;
-  nextId = 3;
-
   form: Transaction = this.emptyForm();
+
+  ngOnInit(): void {
+    this.facade.loadAll();
+    console.log(this.transactions);
+  }
 
   emptyForm(): Transaction {
     return {
@@ -46,6 +45,7 @@ export class Dashboard {
       category: '',
       amount: 0,
       date: new Date().toISOString().split('T')[0],
+      source: '',
       note: '',
     };
   }
@@ -63,13 +63,13 @@ export class Dashboard {
   }
 
   save(form: Transaction) {
-    if (!this.form.category || !this.form.amount || !this.form.date) return;
+    if (!form.category || !form.amount || !form.date) return;
+
     if (this.isEditing) {
-      this.transactions.update((list) =>
-        list.map((t) => (t.id === this.form.id ? { ...this.form } : t)),
-      );
+      this.facade.update(form.id, form);
     } else {
-      this.transactions.update((list) => [...list, { ...this.form, id: this.nextId++ }]);
+      const { id, ...newTransaction } = form;
+      this.facade.create(newTransaction);
     }
     this.showModal = false;
   }
@@ -84,7 +84,9 @@ export class Dashboard {
   }
 
   confirmDelete() {
-    this.transactions.update((list) => list.filter((t) => t.id !== this.deletingId));
+    if (this.deletingId !== null) {
+      this.facade.delete(this.deletingId);
+    }
     this.showDelModal = false;
     this.deletingId = null;
   }
