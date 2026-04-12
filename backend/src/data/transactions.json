@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "type": "expense",
+    "category": "groceries",
+    "amount": 150000,
+    "date": "2026-03-25",
+    "note": "Weekly shopping"
+  },
+  {
+    "id": 2,
+    "type": "income",
+    "category": "salary",
+    "amount": 1500000,
+    "date": "2026-03-20",
+    "note": "March salary"
+  },
+  {
+    "type": "expense",
+    "category": "food",
+    "amount": 50000,
+    "date": "2026-04-12",
+    "note": "Lunch",
+    "id": 3
+  }
+]
