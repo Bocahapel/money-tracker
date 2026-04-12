@@ -19,6 +19,8 @@ export class TransactionDialog implements OnInit {
   @Output() cancelDialog = new EventEmitter<Transaction>();
   @Output() saveDialog = new EventEmitter();
 
+  focusedField = '';
+
   get form(): Transaction {
     return this.initialTransaction!;
   }
@@ -26,25 +28,25 @@ export class TransactionDialog implements OnInit {
   // reset form
   // form: Transaction = this.emptyForm();
 
-  emptyForm(): Transaction {
-    return {
-      id: 0,
-      type: 'income',
-      category: '',
-      amount: 0,
-      date: new Date().toISOString().split('T')[0],
-      note: '',
-    };
-  }
+  // emptyForm(): Transaction {
+  //   return {
+  //     id: 0,
+  //     type: 'income',
+  //     category: '',
+  //     amount: 0,
+  //     date: new Date().toISOString().split('T')[0],
+  //     note: '',
+  //   };
+  // }
 
   ngOnInit(): void {
     console.log(this.initialTransaction);
-    console.log(this.showModal);
-    console.log(this.isEditing);
+    // console.log(this.showModal);
+    // console.log(this.isEditing);
   }
 
   onSave() {
-    this.saveDialog.emit(this.form);
+    this.saveDialog.emit(this.initialTransaction);
   }
 
   onCancel() {

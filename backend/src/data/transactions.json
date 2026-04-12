@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
+    "type": "income",
+    "category": "test income",
+    "amount": 2000000,
+    "date": "2026-04-12",
+    "note": "test_1",
+    "id": 4
+  },
+  {
     "type": "expense",
     "category": "groceries",
-    "amount": 150000,
-    "date": "2026-03-25",
-    "note": "Weekly shopping"
-  },
-  {
-    "id": 2,
-    "type": "income",
-    "category": "salary",
-    "amount": 1500000,
-    "date": "2026-03-20",
-    "note": "March salary"
-  },
-  {
-    "type": "expense",
-    "category": "food",
-    "amount": 50000,
+    "amount": 500000,
     "date": "2026-04-12",
-    "note": "Lunch",
-    "id": 3
+    "note": "hypermart",
+    "id": 5
+  },
+  {
+    "type": "income",
+    "category": "bonus",
+    "amount": 5000000,
+    "date": "2026-04-13",
+    "note": "bonus kantor",
+    "id": 6
   }
 ]
