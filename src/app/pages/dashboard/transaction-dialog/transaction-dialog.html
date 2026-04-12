@@ -100,6 +100,25 @@
         />
       </div>
       <div class="mb-5">
+        <label class="text-xs text-[#888780] block mb-2">Source</label>
+        <input
+          [(ngModel)]="initialTransaction.source"
+          type="text"
+          placeholder="Source"
+          #noteInput
+          (focus)="focusedField = 'Source'"
+          (blur)="focusedField = ''"
+          [ngClass]="
+            focusedField === 'Source' && initialTransaction.type === 'expense'
+              ? 'border-[#A32D2D]'
+              : focusedField === 'Source'
+                ? 'border-[#1D9E75]'
+                : 'border-[#2c2c2a]'
+          "
+          class="w-full bg-[#0f0f10] border rounded-lg px-3 py-2.5 text-sm text-[#e8e6e0] outline-none"
+        />
+      </div>
+      <div class="mb-5">
         <label class="text-xs text-[#888780] block mb-2">Note</label>
         <input
           [(ngModel)]="initialTransaction.note"

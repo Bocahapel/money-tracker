@@ -5,15 +5,8 @@
     "amount": 2000000,
     "date": "2026-04-12",
     "note": "test_1",
+    "source": "BCA",
     "id": 4
-  },
-  {
-    "type": "expense",
-    "category": "groceries",
-    "amount": 500000,
-    "date": "2026-04-12",
-    "note": "hypermart",
-    "id": 5
   },
   {
     "type": "income",
@@ -21,6 +14,7 @@
     "amount": 5000000,
     "date": "2026-04-13",
     "note": "bonus kantor",
+    "source": "BCA",
     "id": 6
   }
 ]

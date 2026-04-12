@@ -1,5 +1,6 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
+// import { MOCK_TRANSACTIONS, Transaction } from '../../shared/transaction-data';
+import { Transaction } from '../../shared/transaction-data';
 import { NgClass, NgIf, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -44,6 +45,7 @@ export class Dashboard implements OnInit {
       category: '',
       amount: 0,
       date: new Date().toISOString().split('T')[0],
+      source: '',
       note: '',
     };
   }
